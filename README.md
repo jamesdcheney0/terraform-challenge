@@ -5,7 +5,7 @@
     1. Sub2 – 10.1.1.0/24 (should be accessible from internet)
     1. Sub3 – 10.1.2.0/24 (should NOT be accessible from internet)
     1. Sub4 – 10.1.3.0/24 (should NOT be accessible from internet)
-1. 1 EC2 instance running Red Hat Linux in subnet sub2
+1. 1 EC2 instance running Red Hat Linux in subnet 2
     1. 20 GB storage
     1. t2.micro
 1. 1 auto scaling group (ASG) that will spread out instances across subnets sub3 and sub4
@@ -32,7 +32,7 @@ File Structure
         1. NAT Gateway that 0.0.0.0/0 in the private subnets point to
         1. 2 private subnets, 2 public subnets 
     1. Security - if splitting this up, like we did at Deloitte, would need to have the SGs outputted, and in the account module have it define those as variables in order for the other resources to use them
-    1. single ec2 - aws-web-server-instance module main.tf - search for this name in the article; this will be part of the inspiration for the single instance
+    1. single ec2 - aws-web-server-instance module main.tf - search for this name in the article; this will be part of the inspiration for the single instance. Just going to attach root block device directly. In thecodinginterface link below, there's also examples of creating bespoke ebs volumes and attaching them
     1. ASG - for this, it looks like using userdata or similar in terraform will work. There's an example in the article listed above 
     1. ALB
     1. S3
@@ -46,3 +46,8 @@ Since there's some pasting, need to make sure all the tabs are uniform with lint
 - Looked up how to make NAT gateway https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 - verified AZ names https://www.google.com/search?q=availability+zones+in+aws+us-east-1&oq=availability+zones+in+aws+us-east-1&aqs=chrome..69i57.7210j0j1&sourceid=chrome&ie=UTF-8 
 - found out how to pull RHEL AMIs from [this](https://gmusumeci.medium.com/how-to-deploy-a-red-hat-enterprise-linux-rhel-ec2-instance-in-aws-using-terraform-6570ad6ee19f) article 
+- Started at https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#ebs-ephemeral-and-root-block-devices to figure out custom ebs sizing
+- https://thecodinginterface.com/blog/terraform-linux-ec2-ebs/ to get practical examples of increasing block storage on instance
+- used this article for in-depth understanding of building the ASG https://adamtheautomator.com/terraform-autoscaling-group/ 
+- how to create a key pair for access instances https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair 
+- specific steps on creating rsa key https://docs.tritondatacenter.com/public-cloud/getting-started/ssh-keys/generating-an-ssh-key-manually/manually-generating-your-ssh-key-in-mac-os-x 
