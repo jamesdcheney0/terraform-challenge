@@ -34,5 +34,9 @@ File Structure
     1. ALB
     1. S3
 
-  git config --global user.email "jamesdcheney0@gmail.com"
-  git config --global user.name "James Cheney"
+Since there's some pasting, need to make sure all the tabs are uniform with linting(?) i think?
+
+# Resources used
+- Installed: zsh, oh my zsh, visual studio code, brew, terraform, github
+- [this](https://spacelift.io/blog/terraform-output) article
+- [This](https://www.google.com/search?q=error%3A+src+refspec+main+does+not+match+any+error%3A+failed+to+push+some+refs+to+when+pushing+main+to+new+repo&oq=error%3A+src+refspec+main+does+not+match+any+error%3A+failed+to+push+some+refs+to+when+pushing+main+to+new+repo&aqs=chrome..69i57j69i58.4557j0j1&sourceid=chrome&ie=UTF-8) google search to troubleshoot how to push to github. Turns out I had to commit files first, then I could push. Also had to set git config username and name to be able to push after committing
