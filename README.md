@@ -15,7 +15,7 @@
     1. 2 minimum, 6 maximum hosts
     1. t2.micro
 1. 1 application load balancer (ALB) that listens on TCP port 80 (HTTP) and forwards traffic to the ASG in subnets sub3 and sub4
-1. Security groups should be used to allow necessary traffic
+1. Security groups should be used to allow necessary traffic - these are going to be interesting. They will need to have outputs, that root main.tf will have to import with the module. thing and be passed into the different modules that they'll see as variables. Maybe save this to last
 1. 1 S3 bucket with two folders and the following lifecycle policies
     1. “Images” folder - move objects older than 90 days to glacier
     1. “Logs” folder - delete objects older than 90 days
@@ -45,3 +45,4 @@ Since there's some pasting, need to make sure all the tabs are uniform with lint
 - [This](https://www.google.com/search?q=error%3A+src+refspec+main+does+not+match+any+error%3A+failed+to+push+some+refs+to+when+pushing+main+to+new+repo&oq=error%3A+src+refspec+main+does+not+match+any+error%3A+failed+to+push+some+refs+to+when+pushing+main+to+new+repo&aqs=chrome..69i57j69i58.4557j0j1&sourceid=chrome&ie=UTF-8) google search to troubleshoot how to push to github. Turns out I had to commit files first, then I could push. Also had to set git config username and name to be able to push after committing
 - Looked up how to make NAT gateway https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 - verified AZ names https://www.google.com/search?q=availability+zones+in+aws+us-east-1&oq=availability+zones+in+aws+us-east-1&aqs=chrome..69i57.7210j0j1&sourceid=chrome&ie=UTF-8 
+- found out how to pull RHEL AMIs from [this](https://gmusumeci.medium.com/how-to-deploy-a-red-hat-enterprise-linux-rhel-ec2-instance-in-aws-using-terraform-6570ad6ee19f) article 
