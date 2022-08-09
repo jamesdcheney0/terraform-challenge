@@ -48,6 +48,12 @@ resource "aws_autoscaling_group" "web_server_asg" {
   force_delete = ["OldestInstance"]
   launch_configuration = aws_launch_configuration.asg_configuration.name
   vpc_zone_identifier = [var.private_subnet_1_id, var.private_subnet_2_id]
+  load_balancers = [
+    aws_elb.web_elb.id
+  ]
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_autoscaling_policy" "web_server_asg_policy" {
@@ -73,4 +79,46 @@ resource "aws_cloudwatch_metric_alarm" "web_cpu_alarm_up" {
     dimensions = {
         AutoScalingGroupName = "${aws_autoscling_group.web_server_asg.name}"
     }
+}
+
+
+# THE SECURITY GROUP VAR POINTS AT NOTHING. Don't like that it's an ELB when the challenge asks for ALB and ELB is pretty much depreciated
+resource "aws_elb" "web_elb" {
+  name = "web-elb"
+  security_groups = [
+    vars.http_80_all_sg
+  ]
+  subnets = [
+    var.public_subnet_1_id,
+    var.public_subnet_2_id
+  ]
+
+  cross_zone_load_balancing   = true
+
+  health_check {
+    healthy_threshold = 2
+    unhealthy_threshold = 2
+    timeout = 3
+    interval = 30
+    target = "HTTP:80/"
+  }
+
+  listener {
+    lb_port = 80
+    lb_protocol = "http"
+    instance_port = "80"
+    instance_protocol = "http"
+  }
+
+}
+
+output "elb_dns_name" {
+  value = aws_elb.web_elb.dns_name
+}
+
+resource "aws_lb" "web_alb" {
+  name = var.alb_name
+  internal = false
+  load_balancer_type = "application"
+  security_groups = [var.http_80_all_sg]
 }
