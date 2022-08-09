@@ -2,6 +2,10 @@ variable "aws_region" {
     description = "AWS region"
     type = string
 }
+variable "aws_key_pair {
+    description = "Name of the keypair to use in connecting to instances"
+    type = string
+}"
 
 
 variable "ec2_instance_name" {
@@ -10,6 +14,10 @@ variable "ec2_instance_name" {
 }
 variable "asg_instance_name" {
     description = "Instance name for ASG instances"
+    type = string
+}
+variable "asg_name" {
+    description = "Name for ASG group"
     type = string
 }
 
