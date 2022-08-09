@@ -33,8 +33,18 @@ module "aws_ec2" {
     public_subnet_1_id = module.vpc.public_subnet_1_id
 }
 
+
+data "aws_caller_identity" "current" {}
+locals {
+  account_id = data.aws_caller_identity.current.account_id
+}
+output "account_id" {
+  value = local.account_id
+}
+
 module "aws_s3" {
     source = "./s3"
+    bucket_name = "${local.account_id}-${var.aws_region}-s3_bucket_name"
 }
 
 module "aws_autoscaling" {
@@ -46,9 +56,10 @@ module "aws_autoscaling" {
     ec2_volume_type = var.asg_volume_type
     ec2_public_key = var.aws_key_pair
     vpc_id = module.vpc.vpc_id
-    subnet_id = module.vpc.subnet_id
     private_subnet_1_id = module.vpc.private_subnet_1_id
     private_subnet_2_id = module.vpc.private_subnet_2_id
+    public_subnet_1_id = module.vpc.public_subnet_1_id
+    public_subnet_2_id = module.vpc.public_subnet_2_id
 }
 
 module "aws_alb" {
