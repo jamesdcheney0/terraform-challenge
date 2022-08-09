@@ -34,45 +34,45 @@ variable "public_subnet_1_name" {
 variable "public_subnet_2_name" {
     description = "Route table for second public subnet"
     type = string
-    default = "dev-public-rt-2"
-}
-variable "private_subnet_1_name" {
-    description = ""
-    type = string
-    default = ""
-}
-variable "private_subnet_2_name" {
-    description = ""
-    type = string
-    default = ""
-}
-
-
-
-variable "public_subnet_1_cidr_block" {
-    description = "CIDR block for first public subnet"
-    type = string
     default = "dev-public-subnet-2"
 }
-variable "public_subnet_2_cidr_block" {
-    description = "CIDR block for second subnet"
+variable "private_subnet_1_name" {
+    description = "Route table for first private subnet"
     type = string
-    default = ""
+    default = "dev-private-subnet-1"
 }
-variable "private_subnet_1_cidr_block" {
-    description = ""
+variable "private_subnet_2_name" {
+    description = "Route table for second private subnet"
     type = string
-    default = ""
+    default = "dev-private-subnet-2"
 }
-variable "private_subnet_2_cidr_block" {
-    description = ""
-    type = string
-    default = ""
-}
+
+
+
 variable "vpc_cidr_block" {
     description = "CIDR block for VPC"
     type = string
     default = "10.1.0.0/16"
+}
+variable "public_subnet_1_cidr_block" {
+    description = "CIDR block for first public subnet"
+    type = string
+    default = "10.1.0.0/24"
+}
+variable "public_subnet_2_cidr_block" {
+    description = "CIDR block for second public subnet"
+    type = string
+    default = "10.1.1.0/24"
+}
+variable "private_subnet_1_cidr_block" {
+    description = "CIDR block for first private subnet"
+    type = string
+    default = "10.1.2.0/24"
+}
+variable "private_subnet_2_cidr_block" {
+    description = "CIDR block for second private subnet"
+    type = string
+    default = "10.1.3.0/24"
 }
 
 
@@ -85,16 +85,16 @@ variable "public_subnet_1_rt_name" {
 variable "public_subnet_2_rt_name" {
     description = "Route table for second public subnet"
     type = string
-    default = ""
+    default = "dev-public-rt-2"
 }
 variable "private_subnet_1_rt_name" {
     description = ""
     type = string
-    default = ""
+    default = "dev-private-rt-1"
 }
 variable "private_subnet_2_rt_name" {
     description = ""
     type = string
-    default = ""
+    default = "dev-private-rt-2"
 }
 
