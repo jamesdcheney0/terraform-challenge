@@ -24,10 +24,12 @@ resource "aws_instance" "bastion" {
   instance_type = var.ec2_instance_type
   subnet_id              = var.public_subnet_1_id
   vpc_security_group_ids = var.bastion_ssh_sg
+  key_name = var.ec2_public_key
   root_block_device {
     volume_size = var.ec2_volume_size
     volume_type = var.ec2_volume_type
   }
+  
 
   tags = {
     Name = var.ec2_instance_name
