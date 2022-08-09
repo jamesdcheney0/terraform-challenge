@@ -21,6 +21,11 @@ module "aws_security_groups" {
     subnet_id = module.vpc.subnet_id
 }
 
+resource "aws_key_pair" "ec2_access" {
+  key_name = "ec2-access"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD0tGAXzEy82bVIb+6UjUD7Jvb8LnSK6PH5sG4E2mWbijEvdxElnFtvvMm1JwLxwKNfT9mDxyFd+xw/mwAmymhgvIAbN1LjB/GTVLskcfsKC6E9A8fhtgVZsmeXQYaxFw/h6ogUWpp3mFf0DWUcpjvsMH1Zokmi4/Coyy9nhR+jWiu4nP9AlgTkQSsGLylH+J4IQe/mZBmjSI0EPWidtQ+vqwtTaU90mszLBAIioIE/gBGfcdj1De3mighVxW4AL0tm3X0+l2u3EdcL2Ex1OV1W5lLiyB2JOyqVORHRegNKzKm85M5i6vlY9biMd/RzurYXpjuqqHsKH9USxgXfxF6iEJrun8Hd0yCv4OFLAfvno5L74W/7JaVqLo8xyaJrtmCcxk28K3cv8HQHM76iBNtSpCuVojsDJK0PLy8cNQ0JuMQ9nS+Tf4qD4UT6/bzH2NRWKf8abdtcbpux7s2B8Az7xDYQZm6vf//wABpx/4DjjnaQURLvRu6CnZ4wunkAIMM= jimmycheney@Jimmys-MacBook-Air.local"
+}
+
 module "aws_ec2" {
     source = "./ec2"
     ec2_instance_name = var.ec2_instance_name
