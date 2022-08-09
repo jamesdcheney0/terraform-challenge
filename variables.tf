@@ -20,6 +20,10 @@ variable "asg_name" {
     description = "Name for ASG group"
     type = string
 }
+variable "s3_bucket_name" {
+    description = "Name for S3 bucket"
+    type = string
+}
 
 
 variable "ec2_instance_type" {
