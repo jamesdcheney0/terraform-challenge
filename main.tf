@@ -26,7 +26,10 @@ module "aws_ec2" {
     ec2_instance_type = var.ec2_instance_type
     ec2_storage_size = var.ec2_storage_size
     vpc_id = module.vpc.vpc_id
-    subnet_id = module.vpc.subnet_id
+    public_subnet_1_id = module.vpc.public_subnet_1_id
+    public_subnet_2_id = module.vpc.public_subnet_2_id
+    private_subnet_1_id = module.vpc.private_subnet_1_id
+    private_subnet_2_id = module.vpc.private_subnet_2_id
 }
 
 module "aws_s3" {
