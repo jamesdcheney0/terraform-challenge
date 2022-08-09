@@ -4,6 +4,7 @@ aws_key_pair = "personal-aws-access"
 ec2_instance_name = "bastion"
 asg_instance_name = "web-server"
 asg_name = "web-server-asg"
+s3_bucket_name = "dev-bucket"
 
 ec2_instance_type = "t2.micro"
 asg_instance_type = "t2.micro"
