@@ -27,13 +27,13 @@ Module = each of the .tf files
 
 File Structure
 1. Account module that calls the ones below it (include main.tf, vars, outputs, terraform.tfvars)
-    1. VPC - for now, write out all 4 subnets. stretch goal is to use the for-each that the bottom of the article mentions 
+    1. VPC  
         1. IGW that 0.0.0.0/0 in the public subnets point to
         1. NAT Gateway that 0.0.0.0/0 in the private subnets point to
         1. 2 private subnets, 2 public subnets 
     1. Security - if splitting this up, like we did at Deloitte, would need to have the SGs outputted, and in the account module have it define those as variables in order for the other resources to use them
-    1. single ec2 - aws-web-server-instance module main.tf - search for this name in the article; this will be part of the inspiration for the single instance. Just going to attach root block device directly. In thecodinginterface link below, there's also examples of creating bespoke ebs volumes and attaching them
-    1. ASG - for this, it looks like using userdata or similar in terraform will work. There's an example in the article listed above 
+    1. single ec2 - In thecodinginterface link below, there's also examples of creating bespoke ebs volumes and attaching them
+    1. ASG 
     1. ALB
     1. S3
 
@@ -54,3 +54,12 @@ Since there's some pasting, need to make sure all the tabs are uniform with lint
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration to verify user_data is the same as in the regular instance creation 
 - importing the public key in the root main.tf wasn't playing nice, so I uploaded the key I made for that purpose into the AWS console and made vars to refer to the name
 - for creating s3 and defining lifecycle policies https://stackoverflow.com/questions/55373524/how-to-add-lifecycle-rules-to-an-s3-bucket-using-terraform 
+- how to use account ID in terraform https://stackoverflow.com/questions/68397972/how-to-use-aws-account-id-variable-in-terraform 
+- https://hands-on.cloud/terraform-recipe-managing-auto-scaling-groups-and-load-balancers/ looked at this for inspiration, but it was based on ELB, which is out of scope for this challenge
+
+
+CURRENTLY TRYING TO FIGURE OUT HOW TO MAKE THE ALB AND HOW TO INTERFACE WITH THE ASG
+then I'll move on to the security groups. Looks like we'll just need one allowing in 80 from all and one allowing 22 from me 
+
+Day | Hours 
+Tuesday | 1000-1350
