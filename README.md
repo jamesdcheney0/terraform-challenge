@@ -28,6 +28,9 @@ Module = each of the .tf files
 File Structure
 1. Account module that calls the ones below it (include main.tf, vars, outputs, terraform.tfvars)
     1. VPC - for now, write out all 4 subnets. stretch goal is to use the for-each that the bottom of the article mentions 
+        1. IGW that 0.0.0.0/0 in the public subnets point to
+        1. NAT Gateway that 0.0.0.0/0 in the private subnets point to
+        1. 2 private subnets, 2 public subnets 
     1. Security - if splitting this up, like we did at Deloitte, would need to have the SGs outputted, and in the account module have it define those as variables in order for the other resources to use them
     1. single ec2 - aws-web-server-instance module main.tf - search for this name in the article; this will be part of the inspiration for the single instance
     1. ASG - for this, it looks like using userdata or similar in terraform will work. There's an example in the article listed above 
@@ -38,5 +41,7 @@ Since there's some pasting, need to make sure all the tabs are uniform with lint
 
 # Resources used
 - Installed: zsh, oh my zsh, visual studio code, brew, terraform, github
-- [this](https://spacelift.io/blog/terraform-output) article
+- [this](https://spacelift.io/blog/terraform-output) article for heavy inspiration of designing the bones, then building out from there 
 - [This](https://www.google.com/search?q=error%3A+src+refspec+main+does+not+match+any+error%3A+failed+to+push+some+refs+to+when+pushing+main+to+new+repo&oq=error%3A+src+refspec+main+does+not+match+any+error%3A+failed+to+push+some+refs+to+when+pushing+main+to+new+repo&aqs=chrome..69i57j69i58.4557j0j1&sourceid=chrome&ie=UTF-8) google search to troubleshoot how to push to github. Turns out I had to commit files first, then I could push. Also had to set git config username and name to be able to push after committing
+- Looked up how to make NAT gateway https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
+- verified AZ names https://www.google.com/search?q=availability+zones+in+aws+us-east-1&oq=availability+zones+in+aws+us-east-1&aqs=chrome..69i57.7210j0j1&sourceid=chrome&ie=UTF-8 
