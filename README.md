@@ -66,6 +66,8 @@ If I directly referenced the website, almost every site is listed. If I visited 
 - Talked with Ryan and Chris and discovered that variables.tf files are defined to let the main.tf file in the directory know what variables can be passed in
 - When running terraform plan after updating variable files, there was an error of 'no module call named "vpc" is declared in the root module' and pointed at lines 33 and 34 being culprits. I added in a module folder and put everything below it, since that's what the spacelift article did. Ran terraform init after committing the changes and ran terraform plan. Still running into same issue. Found out that `module` needs to point at the module in the root main.tf, not the directories under modules. Make sense, and now it'll be more memorable...
 - used this article to figure out the relationship between eip and nat gateway in terraform https://dev.betterdoc.org/infrastructure/2020/02/04/setting-up-a-nat-gateway-on-aws-using-terraform.html
+- Found this article from hashicorp about setting up an ALB https://learn.hashicorp.com/tutorials/terraform/aws-asg
+- Terraform AWS ALB page https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
 
 # Troubleshooting running on M1 Mac - For now, workaround is use Intel Mac
 - I tried running terraform init, and got the error
