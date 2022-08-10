@@ -44,7 +44,7 @@ resource "aws_autoscaling_group" "web_server_asg" {
   launch_configuration = aws_launch_configuration.asg_configuration.name
   vpc_zone_identifier = [var.private_subnet_1_id, var.private_subnet_2_id]
   load_balancers = [
-    aws_lb.web_elb.id
+    aws_lb.web_alb.id
   ]
   lifecycle {
     create_before_destroy = true
