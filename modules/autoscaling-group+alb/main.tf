@@ -77,43 +77,32 @@ resource "aws_cloudwatch_metric_alarm" "web_cpu_alarm_up" {
 }
 
 
-# THE SECURITY GROUP VAR POINTS AT NOTHING. Don't like that it's an ELB when the challenge asks for ALB and ELB is pretty much depreciated
-resource "aws_elb" "web_elb" {
-  name = "web-elb"
-  security_groups = [
-    vars.http_80_all_sg
-  ]
-  subnets = [
-    var.public_subnet_1_id,
-    var.public_subnet_2_id
-  ]
-
-  cross_zone_load_balancing   = true
-
-  health_check {
-    healthy_threshold = 2
-    unhealthy_threshold = 2
-    timeout = 3
-    interval = 30
-    target = "HTTP:80/"
-  }
-
-  listener {
-    lb_port = 80
-    lb_protocol = "http"
-    instance_port = "80"
-    instance_protocol = "http"
-  }
-
-}
-
-output "elb_dns_name" {
-  value = aws_elb.web_elb.dns_name
-}
-
 resource "aws_lb" "web_alb" {
   name = var.alb_name
   internal = false
   load_balancer_type = "application"
-  security_groups = [var.http_80_all_sg]
+  security_groups = [var.web_server_sg]
+  subnets = [var.private_subnet_1_id, var.private_subnet_2_id]
+}
+
+resource "aws_lb_listener" "http_listener" {
+  load_balancer_arn = aws_lb.web_alb.arn
+  port = "80"
+  protocol = "HTTP"
+  default_action {
+    type = "forward"
+    target_group_arn = aws_lb_target_group.web_server.arn
+  }
+}
+
+resource "aws_lb_target_group" "web_server" {
+  name = var.alb_tg_name
+  port = 80
+  protocol = "HTTP"
+  vpc_id = var.vpc_id
+}
+
+resource "aws_autoscaling_attachment" "web_server" {
+  autoscaling_group_name = aws_autoscaling_group.web_server_asg.id
+  alb_target_group_arn = aws_lb_target_group.web_server.arn
 }
