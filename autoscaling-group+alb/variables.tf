@@ -1,3 +1,8 @@
+variable "asg_name" {
+  description = "Name of the Autoscaling Group"
+  type = string
+}
+
 variable "ec2_instance_name" {
   description = "Name of the EC2 instance"
   type = string
