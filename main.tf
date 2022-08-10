@@ -15,12 +15,15 @@ module "aws_vpc" {
     source = "./modules/vpc"
 }
 
-# haven't been developed yet
-# module "aws_security_groups" {
-#     source = "./modules/security-groups"
-#     vpc_id = module.aws_vpc.vpc_id
-#     subnet_id = module.aws_vpc.subnet_id
-# }
+
+module "aws_security_groups" {
+    source = "./modules/security-groups"
+    vpc_id = module.aws_vpc.vpc_id
+    web_server_sg_name = var.web_server_sg_name
+    bastion_ssh_sg_name = var.bastion_ssh_sg_name
+    web_server_sg_description = var.web_server_sg_description
+    bastion_ssh_sg_description = var.bastion_ssh_sg_description
+}
 
 
 module "aws_ec2" {
@@ -32,6 +35,7 @@ module "aws_ec2" {
     ec2_public_key = var.aws_key_pair
     vpc_id = module.aws_vpc.vpc_id
     public_subnet_1_id = module.aws_vpc.public_subnet_1_id
+    bastion_ssh_sg = module.aws_security_groups.bastion_ssh_sg_id
 }
 
 
@@ -61,4 +65,5 @@ module "aws_autoscaling" {
     private_subnet_2_id = module.aws_vpc.private_subnet_2_id
     public_subnet_1_id = module.aws_vpc.public_subnet_1_id
     public_subnet_2_id = module.aws_vpc.public_subnet_2_id
+    web_server_sg = module.aws_security_groups.web_server_sg_id
 }
