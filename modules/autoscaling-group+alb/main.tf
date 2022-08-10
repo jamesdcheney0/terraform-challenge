@@ -40,7 +40,8 @@ resource "aws_autoscaling_group" "web_server_asg" {
   min_size = var.asg_min_size
   health_check_grace_period = 30
   health_check_type = "EC2"
-  force_delete = ["OldestInstance"]
+  force_delete = true
+  termination_policies = ["OldestInstance"]
   launch_configuration = aws_launch_configuration.asg_configuration.name
   vpc_zone_identifier = [var.private_subnet_1_id, var.private_subnet_2_id]
   load_balancers = [
