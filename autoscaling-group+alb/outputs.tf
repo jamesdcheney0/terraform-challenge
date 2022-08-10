@@ -1,2 +1,2 @@
-ASG name
-ALB connection information 
+# ASG name
+# ALB connection information
