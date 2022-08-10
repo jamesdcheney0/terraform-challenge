@@ -15,11 +15,12 @@ module "aws_vpc" {
     source = "./vpc"
 }
 
-module "aws_security_groups" {
-    source = "./security-groups"
-    vpc_id = module.vpc.vpc_id
-    subnet_id = module.vpc.subnet_id
-}
+# haven't been developed yet
+# module "aws_security_groups" {
+#     source = "./security-groups"
+#     vpc_id = module.vpc.vpc_id
+#     subnet_id = module.vpc.subnet_id
+# }
 
 
 module "aws_ec2" {
