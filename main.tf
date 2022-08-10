@@ -12,19 +12,19 @@ provider "aws" {
 }
 
 module "aws_vpc" {
-    source = "./vpc"
+    source = "./modules/vpc"
 }
 
 # haven't been developed yet
 # module "aws_security_groups" {
-#     source = "./security-groups"
+#     source = "./modules/security-groups"
 #     vpc_id = module.vpc.vpc_id
 #     subnet_id = module.vpc.subnet_id
 # }
 
 
 module "aws_ec2" {
-    source = "./ec2"
+    source = "./modules/ec2"
     ec2_instance_name = var.ec2_instance_name
     ec2_instance_type = var.ec2_instance_type
     ec2_volume_size = var.ec2_volume_size
@@ -44,12 +44,12 @@ output "account_id" {
 }
 
 module "aws_s3" {
-    source = "./s3"
+    source = "./modules/s3"
     bucket_name = "${local.account_id}-${var.aws_region}-${s3_bucket_name}"
 }
 
 module "aws_autoscaling" {
-    source = "./autoscaling-group+alb"
+    source = "./modules/autoscaling-group+alb"
     asg_name = var.asg_name
     ec2_instance_name = var.asg_instance_name
     ec2_instance_type = var.asg_instance_type
