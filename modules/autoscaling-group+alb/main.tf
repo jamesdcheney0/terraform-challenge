@@ -21,14 +21,9 @@ data "aws_ami" "rhel_8_5" {
 
 resource "aws_launch_configuration" "asg_configuration" {
   name = var.ec2_instance_name
-  ami = data.aws_ami.rhel_8_5.id
+  image_id = data.aws_ami.rhel_8_5.id
   instance_type = var.ec2_instance_type
   key_name = var.ec2_public_key
-
-  tags = {
-    Name = var.ec2_instance_name
-  }
-
   user_data = <<-EOF
     #!/bin/bash
     sudo yum update -y
