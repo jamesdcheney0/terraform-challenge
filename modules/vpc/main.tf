@@ -73,7 +73,12 @@ resource "aws_route_table_association" "public_subnet_2_rt_association" {
   route_table_id = aws_route_table.public_subnet_2_route_table.id
 }
 
+resource "aws_eip" "nat_gateway_eip" {
+    vpc = true
+}
+
 resource "aws_nat_gateway" "nat_gateway" {
+    allocation_id = aws_eip.nat_gateway_eip.id
     subnet_id = aws_subnet.public_subnet_1
 
     tags = {
