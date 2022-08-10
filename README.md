@@ -62,11 +62,12 @@ Since there's some pasting, need to make sure all the tabs are uniform with lint
 - https://hands-on.cloud/terraform-recipe-managing-auto-scaling-groups-and-load-balancers/ looked at this for inspiration, but it was based on ELB, which is out of scope for this challenge
 - https://stackoverflow.com/questions/61512718/why-does-terraform-fail-with-an-argument-named-flow-log-destination-type-is-n when running terraform plan on the Intel Mac, getting an error with the aws_autoscaling module where all the variables are saying `error: unsupported argument` and further down `an argument named <variable_name> is not expected here` From what I can tell, the variables all use the same naming, and look the same as other modules that don't appear to be failing
 - Talked with Ryan and Chris and discovered that variables.tf files are defined to let the main.tf file in the directory know what variables can be passed in
+- When running terraform plan after updating variable files, there was an error of 'no module call named "vpc" is declared in the root module' and pointed at lines 33 and 34 being culprits. I added in a module folder and put everything below it, since that's what the spacelift article did. Ran terraform init after committing the changes and ran terraform plan. Still running into same issue. Found out that `module` needs to point at the module in the root main.tf, not the directories under modules. Make sense, and now it'll be more memorable...
 
 Day | Hours
 Tuesday | 1000-1350; 1615-1700
 
-# Troubleshooting
+# Troubleshooting running on M1 Mac - For now, workaround is use Intel Mac
 - I tried running terraform init, and got the error
 ```
 │ Error: Incompatible provider version
