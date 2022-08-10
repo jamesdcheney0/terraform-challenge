@@ -1,3 +1,4 @@
 .terraform/modules/modules.json
 .terraform.lock.hcl
 .gitignore
+.rootkey.csv
