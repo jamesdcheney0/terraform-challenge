@@ -55,13 +55,15 @@ module "aws_s3" {
 module "aws_autoscaling" {
     source = "./modules/autoscaling-group+alb"
     asg_name = var.asg_name
+    alb_name = var.alb_name
+    alb_tg_name = var.alb_tg_name
     ec2_instance_name = var.asg_instance_name
     ec2_instance_type = var.asg_instance_type
     ec2_volume_size = var.asg_volume_size
     ec2_volume_type = var.asg_volume_type
     ec2_public_key = var.aws_key_pair
-    alb_name = var.alb_name
-    alb_tg_name = var.alb_tg_name
+    asg_max_size = var.asg_max_size
+    asg_min_size = var.asg_min_size
     vpc_id = module.aws_vpc.vpc_id
     private_subnet_1_id = module.aws_vpc.private_subnet_1_id
     private_subnet_2_id = module.aws_vpc.private_subnet_2_id

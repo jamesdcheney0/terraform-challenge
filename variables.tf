@@ -83,3 +83,14 @@ variable "asg_volume_type" {
     description = "Instance volume type for ASG instances"
     type = string
 }
+
+
+
+variable "asg_max_size" {
+  description = "Maximum desired quantity of autoscaled instances"
+  type = string
+}
+variable "asg_min_size" {
+  description = "Minimum desired quantity of autoscaled instances"
+  type = string
+}

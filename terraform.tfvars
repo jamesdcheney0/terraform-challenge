@@ -21,3 +21,6 @@ asg_volume_size = "20"
 
 asg_volume_type = "gp2"
 ec2_volume_type = "gp2"
+
+asg_max_size = 6
+asg_min_size = 2
