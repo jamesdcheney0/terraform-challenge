@@ -44,7 +44,7 @@ output "account_id" {
 
 module "aws_s3" {
     source = "./s3"
-    bucket_name = "${local.account_id}-${var.aws_region}-s3_bucket_name"
+    bucket_name = "${local.account_id}-${var.aws_region}-${s3_bucket_name}"
 }
 
 module "aws_autoscaling" {
