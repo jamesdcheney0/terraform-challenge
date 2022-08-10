@@ -63,3 +63,15 @@ then I'll move on to the security groups. Looks like we'll just need one allowin
 
 Day | Hours 
 Tuesday | 1000-1350
+
+# Troubleshooting
+- I tried running terraform init, and got the error 
+```
+│ Error: Incompatible provider version
+│ 
+│ Provider registry.terraform.io/hashicorp/aws v3.16.0 does not have a package available for your current platform, darwin_arm64.
+```
+- found this article https://discuss.hashicorp.com/t/template-v2-2-0-does-not-have-a-package-available-mac-m1/35099/3
+- Then did `brew uninstall terraform`, `brew install kreuzwerker/taps/m1-terraform-provider-helper`, got an error, so `softwareupdate --all --install --force`, which said everything up to date, so ran `sudo rm -rf /Library/Developer/CommandLineTools` then `sudo xcode-select --install`. Retried the m1 helper which worked, so ran `brew tap hashicorp/tap`, `brew install hashicorp/tap/terraform`, `m1-terraform-provider-helper activate`,`m1-terraform-provider-helper install hashicorp/template -v v2.2.0`, then `terraform --version` which said it was on darwin, but still has the same error... Uninstalled terraform `brew uninstall terraform` and tried `brew tap hashicorp/tap`, `brew install hashicorp/tap/terraform`, and `m1-terraform-provider-helper install hashicorp/template -v v2.2.0` again. Same error :(. Tried `terraform init --upgrade` from https://stackoverflow.com/questions/66281882/how-can-i-get-terraform-init-to-run-on-my-apple-silicon-macbook-pro-for-the-go and no dice. 
+- added templatefile() to asg ec2 templatefile, same error https://cloudonaut.io/terraform-incompatible-provider-version/. Also ran `terraform state rm data.template_file.userdata` and no state file was found 
+- Need to totally delete all terraform things (not just brew uninstall) and try again tomorrow
