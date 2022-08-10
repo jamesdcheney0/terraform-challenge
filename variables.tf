@@ -24,6 +24,26 @@ variable "s3_bucket_name" {
     description = "Name for S3 bucket"
     type = string
 }
+variable "web_server_sg_name" {
+    description = "Name for web server security group"
+    type = string
+}
+variable "bastion_ssh_sg_name" {
+    description = "Name for bastion SSH security group"
+    type = string
+}
+
+
+
+variable "web_server_sg_description" {
+    description = "Description for web server security group"
+    type = string
+}
+variable "bastion_ssh_sg_description" {
+    description = "Description for bastion SSH security group"
+    type = string
+}
+
 
 
 variable "ec2_instance_type" {
