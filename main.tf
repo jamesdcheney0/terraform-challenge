@@ -60,6 +60,8 @@ module "aws_autoscaling" {
     ec2_volume_size = var.asg_volume_size
     ec2_volume_type = var.asg_volume_type
     ec2_public_key = var.aws_key_pair
+    alb_name = var.alb_name
+    alb_tg_name = var.alb_tg_name
     vpc_id = module.aws_vpc.vpc_id
     private_subnet_1_id = module.aws_vpc.private_subnet_1_id
     private_subnet_2_id = module.aws_vpc.private_subnet_2_id

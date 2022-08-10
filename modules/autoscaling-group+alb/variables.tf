@@ -8,6 +8,18 @@ variable "ec2_instance_name" {
   type = string
 }
 
+variable "alb_name" {
+  description = "Name of the application load balancer"
+  type = string
+}
+
+variable "alb_tg_name" {
+  description = "Name of the target group for the application load balancer"
+  type = string
+}
+
+
+
 variable "ec2_instance_type" {
   description = "EC2 instance type"
   type = string

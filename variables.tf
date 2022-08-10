@@ -32,6 +32,14 @@ variable "bastion_ssh_sg_name" {
     description = "Name for bastion SSH security group"
     type = string
 }
+variable "alb_name" {
+    description = "Name for the application load balancer"
+    type = string
+}
+variable "alb_tg_name" {
+    description = "Name for the target groups for the application load balancer"
+    type = string
+}
 
 
 
