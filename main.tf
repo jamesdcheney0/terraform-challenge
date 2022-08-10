@@ -9,9 +9,9 @@ terraform {
 
 provider "aws" {
   region = var.aws_region
-  shared_config_files = ["/Users/jamescheney/.aws/config"]
-  shared_credentials_files = ["/Users/jamescheney/.aws/credentials"]
-  profile = "personal-aws"
+  # shared_config_files = ["/Users/jamescheney/.aws/config"]
+  # shared_credentials_files = ["/Users/jamescheney/.aws/credentials"]
+  # profile = "personal-aws"
 }
 
 module "aws_vpc" {
