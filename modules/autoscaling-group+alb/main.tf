@@ -1,6 +1,6 @@
 data "aws_ami" "rhel_8_5" {
   most_recent = true
-  owners = ["309956199498"] 
+  owners = ["309956199498"]
   filter {
     name   = "name"
     values = ["RHEL-8.5*"]
@@ -29,7 +29,7 @@ resource "aws_launch_configuration" "asg_configuration" {
     Name = var.ec2_instance_name
   }
 
-  user_data = templatefile(<<-EOF
+  user_data = <<-EOF
     #!/bin/bash
     sudo yum update -y
     sudo yum install httpd -y
@@ -37,7 +37,6 @@ resource "aws_launch_configuration" "asg_configuration" {
     sudo systemctl start httpd
     echo "<html><body><div>Hello World :)</div></body></html>" > /var/www/html/index.html
     EOF
-  )
 }
 
 resource "aws_autoscaling_group" "web_server_asg" {
