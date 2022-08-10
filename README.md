@@ -21,8 +21,8 @@
     1. “Logs” folder - delete objects older than 90 days
 
 # To Do
-1. Get terraform init working on cli
 1. Change the ELB stuff to ALB
+1. Add security groups and references to them
 
 ## Thought process of designing this
 Started with [this](https://spacelift.io/blog/terraform-output) article that linked to [this](https://github.com/spacelift-io-blog-posts/Blog-Technical-Content/tree/master/terraform-output/modules) Github.
@@ -31,19 +31,21 @@ Module = each of the .tf files
 
 File Structure
 1. Account module that calls the ones below it (include main.tf, vars, outputs, terraform.tfvars)
-    1. VPC  
-        1. IGW that 0.0.0.0/0 in the public subnets point to
-        1. NAT Gateway that 0.0.0.0/0 in the private subnets point to
-        1. 2 private subnets, 2 public subnets
-    1. Security - if splitting this up, like we did at Deloitte, would need to have the SGs outputted, and in the account module have it define those as variables in order for the other resources to use them
-    1. single ec2 - In thecodinginterface link below, there's also examples of creating bespoke ebs volumes and attaching them
-    1. ASG
-    1. ALB
-    1. S3
+  1. Modules
+      1. VPC  
+          1. IGW that 0.0.0.0/0 in the public subnets point to
+          1. NAT Gateway that 0.0.0.0/0 in the private subnets point to
+          1. 2 private subnets, 2 public subnets
+      1. Security - if splitting this up, like we did at Deloitte, would need to have the SGs outputted, and in the account module have it define those as variables in order for the other resources to use them
+      1. single ec2 - In thecodinginterface link below, there's also examples of creating bespoke ebs volumes and attaching them
+      1. ASG
+      1. ALB
+      1. S3
 
 Since there's some pasting, need to make sure all the tabs are uniform with linting(?) i think?
 
 # Resources used
+If I directly referenced the website, almost every site is listed. If I visited while searching for specific information, I may or may not have recorded it
 - Installed: zsh, oh my zsh, visual studio code (replaced by atom), brew, terraform, github
 - https://spacelift.io/blog/terraform-output article for heavy inspiration of designing the bones, then building out from there
 - https://www.google.com/search?q=error%3A+src+refspec+main+does+not+match+any+error%3A+failed+to+push+some+refs+to+when+pushing+main+to+new+repo&oq=error%3A+src+refspec+main+does+not+match+any+error%3A+failed+to+push+some+refs+to+when+pushing+main+to+new+repo&aqs=chrome..69i57j69i58.4557j0j1&sourceid=chrome&ie=UTF-8 google search to troubleshoot how to push to github. Turns out I had to commit files first, then I could push. Also had to set git config username and name to be able to push after committing
@@ -64,9 +66,6 @@ Since there's some pasting, need to make sure all the tabs are uniform with lint
 - Talked with Ryan and Chris and discovered that variables.tf files are defined to let the main.tf file in the directory know what variables can be passed in
 - When running terraform plan after updating variable files, there was an error of 'no module call named "vpc" is declared in the root module' and pointed at lines 33 and 34 being culprits. I added in a module folder and put everything below it, since that's what the spacelift article did. Ran terraform init after committing the changes and ran terraform plan. Still running into same issue. Found out that `module` needs to point at the module in the root main.tf, not the directories under modules. Make sense, and now it'll be more memorable...
 - used this article to figure out the relationship between eip and nat gateway in terraform https://dev.betterdoc.org/infrastructure/2020/02/04/setting-up-a-nat-gateway-on-aws-using-terraform.html
-
-Day | Hours
-Tuesday | 1000-1350; 1615-1700
 
 # Troubleshooting running on M1 Mac - For now, workaround is use Intel Mac
 - I tried running terraform init, and got the error
