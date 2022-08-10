@@ -29,7 +29,7 @@ resource "aws_launch_configuration" "asg_configuration" {
     Name = var.ec2_instance_name
   }
 
-  user_data = <<-EOF
+  user_data = templatefile(<<-EOF
     #!/bin/bash
     sudo yum update -y
     sudo yum install httpd -y
@@ -37,6 +37,7 @@ resource "aws_launch_configuration" "asg_configuration" {
     sudo systemctl start httpd
     echo "<html><body><div>Hello World :)</div></body></html>" > /var/www/html/index.html
     EOF
+  )
 }
 
 resource "aws_autoscaling_group" "web_server_asg" {
