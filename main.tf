@@ -48,7 +48,7 @@ module "aws_s3" {
 }
 
 module "aws_autoscaling" {
-    source = "./autoscaling-group"
+    source = "./autoscaling-group+alb"
     asg_name = var.asg_name
     ec2_instance_name = var.asg_instance_name
     ec2_instance_type = var.asg_instance_type
@@ -60,10 +60,4 @@ module "aws_autoscaling" {
     private_subnet_2_id = module.vpc.private_subnet_2_id
     public_subnet_1_id = module.vpc.public_subnet_1_id
     public_subnet_2_id = module.vpc.public_subnet_2_id
-}
-
-module "aws_alb" {
-    source = "./alb"
-    vpc_id = module.vpc.vpc_id
-    subnet_id = module.vpc.subnet_id
 }
