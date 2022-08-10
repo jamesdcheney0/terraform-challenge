@@ -70,6 +70,8 @@ If I directly referenced the website, almost every site is listed. If I visited 
 - Terraform AWS ALB page https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
 - took the suggestion here to sort an error with the ec2 security group https://www.reddit.com/r/Terraform/comments/c77ai2/vpc_security_group_ids_examples/
 - to have terraform used a named AWS profile https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+- had to use aws-vault on Intel Mac and provide my personal AWS credentials, then ran terraform plan https://github.com/99designs/aws-vault
+- TERRAFORM PLAN WORKS!! HORRAY!! 
 
 # Troubleshooting running on M1 Mac - For now, workaround is use Intel Mac
 - I tried running terraform init, and got the error
