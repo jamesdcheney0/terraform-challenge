@@ -2,10 +2,10 @@ variable "aws_region" {
     description = "AWS region"
     type = string
 }
-variable "aws_key_pair {
+variable "aws_key_pair" {
     description = "Name of the keypair to use in connecting to instances"
     type = string
-}"
+}
 
 
 variable "ec2_instance_name" {
