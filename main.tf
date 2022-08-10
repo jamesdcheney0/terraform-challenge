@@ -18,8 +18,8 @@ module "aws_vpc" {
 # haven't been developed yet
 # module "aws_security_groups" {
 #     source = "./modules/security-groups"
-#     vpc_id = module.vpc.vpc_id
-#     subnet_id = module.vpc.subnet_id
+#     vpc_id = module.aws_vpc.vpc_id
+#     subnet_id = module.aws_vpc.subnet_id
 # }
 
 
@@ -30,8 +30,8 @@ module "aws_ec2" {
     ec2_volume_size = var.ec2_volume_size
     ec2_volume_type = var.ec2_volume_type
     ec2_public_key = var.aws_key_pair
-    vpc_id = module.vpc.vpc_id
-    public_subnet_1_id = module.vpc.public_subnet_1_id
+    vpc_id = module.aws_vpc.vpc_id
+    public_subnet_1_id = module.aws_vpc.public_subnet_1_id
 }
 
 
@@ -45,7 +45,7 @@ output "account_id" {
 
 module "aws_s3" {
     source = "./modules/s3"
-    bucket_name = "${local.account_id}-${var.aws_region}-${s3_bucket_name}"
+    bucket_name = "${local.account_id}-${var.aws_region}-${var.s3_bucket_name}"
 }
 
 module "aws_autoscaling" {
@@ -56,9 +56,9 @@ module "aws_autoscaling" {
     ec2_volume_size = var.asg_volume_size
     ec2_volume_type = var.asg_volume_type
     ec2_public_key = var.aws_key_pair
-    vpc_id = module.vpc.vpc_id
-    private_subnet_1_id = module.vpc.private_subnet_1_id
-    private_subnet_2_id = module.vpc.private_subnet_2_id
-    public_subnet_1_id = module.vpc.public_subnet_1_id
-    public_subnet_2_id = module.vpc.public_subnet_2_id
+    vpc_id = module.aws_vpc.vpc_id
+    private_subnet_1_id = module.aws_vpc.private_subnet_1_id
+    private_subnet_2_id = module.aws_vpc.private_subnet_2_id
+    public_subnet_1_id = module.aws_vpc.public_subnet_1_id
+    public_subnet_2_id = module.aws_vpc.public_subnet_2_id
 }
