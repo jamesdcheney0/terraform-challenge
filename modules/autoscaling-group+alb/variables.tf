@@ -52,3 +52,8 @@ variable "private_subnet_2_id" {
   description = "ID of the second private subnet to be launched in"
   type = string
 }
+
+variable "web_server_sg" {
+  description = "Security group to allow web access to autoscaling group instances"
+  type = string
+}
