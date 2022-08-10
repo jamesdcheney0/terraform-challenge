@@ -32,3 +32,8 @@ variable "public_subnet_1_id" {
   description = "ID of the subnet to be launched in"
   type = string
 }
+
+variable "bastion_ssh_sg" {
+  description = "Security group for bastion SSH access"
+  type = string
+}
