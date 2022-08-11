@@ -20,11 +20,10 @@
     1. “Images” folder - move objects older than 90 days to glacier
     1. “Logs” folder - delete objects older than 90 days
 
-# To Do
-1. Change the ELB stuff to ALB
-1. Add security groups and references to them
+# Current Architecture
+![Architecture diagram](./terraform-challenge-arch-diagram.drawio.png)
 
-## Thought process of designing this
+# Thought process while designing this
 Started with [this](https://spacelift.io/blog/terraform-output) article that linked to [this](https://github.com/spacelift-io-blog-posts/Blog-Technical-Content/tree/master/terraform-output/modules) Github.
 Understanding how variables work. Outputs can be read by parent modules. Variables can be read by child modules. It does not seem like outputs can be read by 'sibling' modules
 Module = each of the .tf files
@@ -71,7 +70,9 @@ If I directly referenced the website, almost every site is listed. If I visited 
 - took the suggestion here to sort an error with the ec2 security group https://www.reddit.com/r/Terraform/comments/c77ai2/vpc_security_group_ids_examples/
 - to have terraform used a named AWS profile https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 - had to use aws-vault on Intel Mac and provide my personal AWS credentials, then ran terraform plan https://github.com/99designs/aws-vault
-- TERRAFORM PLAN WORKS!! HORRAY!! 
+- TERRAFORM PLAN WORKS!! HORRAY!!
+- For the networking diagram, looked at lots of diagrams on google images to get an idea how to flesh it out
+- Forum to link .png in .md https://stackoverflow.com/questions/41604263/how-do-i-display-local-image-in-markdown 
 
 # Troubleshooting running on M1 Mac - For now, workaround is use Intel Mac
 - I tried running terraform init, and got the error
