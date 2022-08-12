@@ -1,3 +1,6 @@
+# Current Architecture
+![Architecture diagram](./terraform-challenge-arch-diagram.drawio.png)
+
 # The challenge
 1. 1 VPC – 10.1.0.0/16
 1. 4 subnets (spread evenly across two availability zones)
@@ -21,9 +24,6 @@
     1. “Logs” folder - delete objects older than 90 days
 
 - Able to successfully get to the bastion and ![view metadata](./working-bastion.png)
-
-# Current Architecture
-![Architecture diagram](./terraform-challenge-arch-diagram.drawio.png)
 
 
 # Resources used
