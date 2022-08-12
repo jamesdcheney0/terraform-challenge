@@ -23,27 +23,12 @@
 # Current Architecture
 ![Architecture diagram](./terraform-challenge-arch-diagram.drawio.png)
 
-# Thought process while designing this
-Started with [this](https://spacelift.io/blog/terraform-output) article that linked to [this](https://github.com/spacelift-io-blog-posts/Blog-Technical-Content/tree/master/terraform-output/modules) Github.
-Understanding how variables work. Outputs can be read by parent modules. Variables can be read by child modules. It does not seem like outputs can be read by 'sibling' modules
-Module = each of the .tf files
-
-File Structure
-1. Account module that calls the ones below it (include main.tf, vars, outputs, terraform.tfvars)
-  1. Modules
-      1. VPC  
-          1. IGW that 0.0.0.0/0 in the public subnets point to
-          1. NAT Gateway that 0.0.0.0/0 in the private subnets point to
-          1. 2 private subnets, 2 public subnets
-      1. Security - if splitting this up, like we did at Deloitte, would need to have the SGs outputted, and in the account module have it define those as variables in order for the other resources to use them
-      1. single ec2 - In thecodinginterface link below, there's also examples of creating bespoke ebs volumes and attaching them
-      1. ASG
-      1. ALB
-      1. S3
-
 
 # Resources used
 If I directly referenced the website, almost every site is listed. If I visited while searching for specific information, I may or may not have recorded it
+- Started with [this](https://spacelift.io/blog/terraform-output) article that linked to [this](https://github.com/spacelift-io-blog-posts/Blog-Technical-Content/tree/master/terraform-output/modules) Github.
+- Understanding how variables work. Outputs can be read by parent modules. Variables can be read by child modules. It does not seem like outputs can be read by 'sibling' modules
+- Module = each of the .tf files
 - Installed: zsh, oh my zsh, visual studio code (replaced by atom), brew, terraform, github, aws-vault, awscli
 - [This article](https://spacelift.io/blog/terraform-output) for heavy inspiration of designing the bones, then building out from there
 - [Google search](https://www.google.com/search?q=error%3A+src+refspec+main+does+not+match+any+error%3A+failed+to+push+some+refs+to+when+pushing+main+to+new+repo&oq=error%3A+src+refspec+main+does+not+match+any+error%3A+failed+to+push+some+refs+to+when+pushing+main+to+new+repo&aqs=chrome..69i57j69i58.4557j0j1&sourceid=chrome&ie=UTF-8) to troubleshoot how to push to Github. Turns out I had to commit files first, then I could push. Also had to set git config username and name to be able to push after committing
