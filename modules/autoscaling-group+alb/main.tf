@@ -30,6 +30,7 @@ resource "aws_launch_configuration" "asg_configuration" {
     sudo yum install httpd -y
     sudo systemctl enable httpd
     sudo systemctl start httpd
+    sudo chown -R $USER:$USER /var/www
     echo "<html><body><div>Hello World :)</div></body></html>" > /var/www/html/index.html
     EOF
 }
