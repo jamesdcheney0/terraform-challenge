@@ -57,6 +57,9 @@ If I directly referenced the website, almost every site is listed. If I visited 
 - TERRAFORM PLAN WORKS!! HORRAY!!
 - For the networking diagram, looked at lots of diagrams on google images to get an idea how to flesh it out
 - [Forum](https://stackoverflow.com/questions/41604263/how-do-i-display-local-image-in-markdown) to link .png in .md
+- Looked at the [article](https://www.terraform.io/language/meta-arguments/depends_on) on depends_on. `terraform plan` failed saying the ASG couldn't find the ALB
+- Used [this page](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-retrieval.html) for the command to look up instance metadata
+- According to [this](github.com/terraform-aws-modules/terraform-aws-autoscaling/issues/16) github thread, load_balancers refers to classic load balancers, and target_group_arn must be used instead and point at the ALB target group
 
 ## Troubleshooting running on M1 Mac
 For now, workaround is use Intel Mac
