@@ -60,7 +60,8 @@ If I directly referenced the website, almost every site is listed. If I visited 
 - Looked at the [article](https://www.terraform.io/language/meta-arguments/depends_on) on depends_on. `terraform plan` failed saying the ASG couldn't find the ALB
 - Used [this page](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-retrieval.html) for the command to look up instance metadata
 - According to [this](github.com/terraform-aws-modules/terraform-aws-autoscaling/issues/16) github thread, load_balancers refers to classic load balancers, and target_group_arn must be used instead and point at the ALB target group
-- [Stackoverflow](https://stackoverflow.com/questions/50677641/add-asg-instances-in-target-group-via-terraform) said to put target_group_arns in brackets and push in a variable for the arns
+- [Stack overflow](https://stackoverflow.com/questions/50677641/add-asg-instances-in-target-group-via-terraform) said to put target_group_arns in brackets and push in a variable for the arns
+- The stack overflow article may have been misleading. Looking at terraform [documentation](https://learn.hashicorp.com/tutorials/terraform/aws-asg?utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS) it uses the aws_autoscaling_attachment resource to do the attaching, which I already had defined, so I just removed the target_group_arns in the ASG resource
 
 ## Troubleshooting running on M1 Mac
 For now, workaround is use Intel Mac
