@@ -50,6 +50,9 @@ resource "aws_autoscaling_group" "web_server_asg" {
   lifecycle {
     create_before_destroy = true
   }
+  depends_on [
+    aws_lb.web_alb
+  ]
 }
 
 resource "aws_autoscaling_policy" "web_server_asg_policy" {
@@ -58,6 +61,9 @@ resource "aws_autoscaling_policy" "web_server_asg_policy" {
     adjustment_type = "ChangeInCapacity"
     cooldown = 300
     autoscaling_group_name = aws_autoscaling_group.web_server_asg.name
+    depends_on [
+      aws_autoscaling_group.web_server_asg
+    ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "web_cpu_alarm_up" {
@@ -75,6 +81,9 @@ resource "aws_cloudwatch_metric_alarm" "web_cpu_alarm_up" {
     dimensions = {
         AutoScalingGroupName = "${aws_autoscaling_group.web_server_asg.name}"
     }
+    depends_on [
+      aws_autoscaling_group.web_server_asg
+    ]
 }
 
 
