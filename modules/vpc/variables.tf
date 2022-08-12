@@ -1,12 +1,12 @@
 variable "aws_az_1" {
     description = "Availability zone 1 for resources to use"
     type = string
-    default = "us-east-1"
+    default = "us-east-1a"
 }
 variable "aws_az_2" {
     description = "Availability zone 2 for resources to use"
     type = string
-    default = "us-east-2"
+    default = "us-east-1b"
 }
 
 variable "vpc_name" {
@@ -97,4 +97,3 @@ variable "private_subnet_2_rt_name" {
     type = string
     default = "dev-private-rt-2"
 }
-
