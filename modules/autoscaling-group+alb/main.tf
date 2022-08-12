@@ -44,7 +44,7 @@ resource "aws_autoscaling_group" "web_server_asg" {
   termination_policies = ["OldestInstance"]
   launch_configuration = aws_launch_configuration.asg_configuration.name
   vpc_zone_identifier = [var.private_subnet_1_id, var.private_subnet_2_id]
-  target_group_arns = [${aws_lb_target_group.http_listener.arn}]
+  target_group_arns = ["${aws_lb_target_group.http_listener.arn}"]
   lifecycle {
     create_before_destroy = true
   }
