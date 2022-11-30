@@ -1,39 +1,20 @@
-variable "ec2_instance_name" {
-  description = "Name of the EC2 instance"
-  type = string
-}
-
 variable "ec2_instance_type" {
   description = "EC2 instance type"
-  type = string
+  type        = string
 }
 
 variable "ec2_volume_size" {
   description = "EC2 volume size"
-  type = string
+  type        = string
 }
 
 variable "ec2_volume_type" {
   description = "EC2 volume type"
-  type = string
+  type        = string
 }
 
 variable "ec2_public_key" {
   description = "Public key for SSH access to instance"
-  type = string
+  type        = string
 }
 
-variable "vpc_id" {
-  description = "ID of the VPC to be launched in"
-  type = string
-}
-
-variable "public_subnet_1_id" {
-  description = "ID of the subnet to be launched in"
-  type = string
-}
-
-variable "bastion_ssh_sg" {
-  description = "Security group for bastion SSH access"
-  type = string
-}
