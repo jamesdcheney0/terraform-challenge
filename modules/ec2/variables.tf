@@ -1,3 +1,8 @@
+variable "env" {
+  description = "What is the purpose of the environment?"
+  type        = string
+}
+
 variable "ec2_instance_type" {
   description = "EC2 instance type"
   type        = string
