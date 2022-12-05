@@ -8,10 +8,10 @@ terraform {
 }
 
 provider "aws" {
-#   region = var.aws_region
-#   # shared_config_files = ["/Users/jamescheney/.aws/config"]
-#   # shared_credentials_files = ["/Users/jamescheney/.aws/credentials"]
-#   # profile = "personal-aws"
+    region = "us-east-1"
+# #   # shared_config_files = ["/Users/jamescheney/.aws/config"]
+# #   # shared_credentials_files = ["/Users/jamescheney/.aws/credentials"]
+#     profile = "personal"
 }
 
 module "aws_vpc" {
@@ -31,6 +31,7 @@ module "aws_security_groups" {
 
 module "bastion" {
   source            = "./modules/ec2"
+  env               = var.env
   public_subnet = module.aws_vpc.public_subnets[0]
   bastion_sg_id = module.aws_security_groups.bastion_ssh_sg_id
   ec2_instance_type = var.ec2_instance_type
@@ -58,7 +59,7 @@ module "aws_autoscaling" {
   env               = var.env
   vpc_id = module.aws_vpc.vpc_id
   private_subnets       = module.aws_vpc.private_subnets
-  public_subnets = [module.aws_vpc.public_subnets]
+  public_subnets = module.aws_vpc.public_subnets
   web_server_sg_id  = [module.aws_security_groups.web_server_sg_id]
   ec2_instance_type = var.asg_instance_type
   ec2_volume_size   = var.asg_volume_size
