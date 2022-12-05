@@ -1,5 +1,5 @@
 resource "aws_security_group" "web_server" {
-  name        = var.web_server_sg_name
+  name        = "${var.env}-HTTP-sg"
   description = "${var.env} web server HTTP security group"
   vpc_id      = var.vpc_id
 
@@ -24,7 +24,7 @@ resource "aws_security_group" "web_server" {
 }
 
 resource "aws_security_group" "bastion_ssh" {
-  name        = var.bastion_ssh_sg_name
+  name        = "${var.env}-bastion-SSH-sg"
   description = "${var.env} Bastion SSH security group"
   vpc_id      = var.vpc_id
 
