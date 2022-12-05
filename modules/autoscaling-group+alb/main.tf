@@ -44,7 +44,7 @@ resource "aws_autoscaling_group" "web_server_asg" {
   force_delete              = true
   termination_policies      = ["OldestInstance"]
   launch_configuration      = aws_launch_configuration.asg_configuration.name
-  vpc_zone_identifier       = var.private_subnets
+  vpc_zone_identifier       = [var.private_subnets[0].id, var.public_subnets[1].id]
   lifecycle {
     create_before_destroy = true
   }
@@ -90,7 +90,7 @@ resource "aws_lb" "web_alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = var.web_server_sg_id
-  subnets            = var.public_subnets
+  subnets            = [var.public_subnets[0].id, var.public_subnets[1].id]
 }
 
 resource "aws_lb_listener" "http_listener" {
