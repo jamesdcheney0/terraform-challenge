@@ -1,7 +1,7 @@
 resource "aws_security_group" "web_server" {
   name        = var.web_server_sg_name
   description = "${var.env} web server HTTP security group"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = var.vpc_id
 
   ingress {
     description = "Allow traffic on port 80 from everywhere"
