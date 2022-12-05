@@ -21,15 +21,12 @@ resource "aws_security_group" "web_server" {
   tags = {
     Name = "Web-server-80-SG-${var.env}"
   }
-  depends_on = [
-    module.vpc
-  ]
 }
 
 resource "aws_security_group" "bastion_ssh" {
   name        = var.bastion_ssh_sg_name
   description = "${var.env} Bastion SSH security group"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = var.vpc_id
 
   ingress {
     description = "Allow traffic on port 22 from local machine"
@@ -49,7 +46,4 @@ resource "aws_security_group" "bastion_ssh" {
   tags = {
     Name = "Bastion-SSH-SG-${var.env}"
   }
-  depends_on = [
-    module.vpc
-  ]
 }

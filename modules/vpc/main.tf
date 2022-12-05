@@ -47,7 +47,7 @@ resource "aws_route_table" "public_subnets_route_table" {
 resource "aws_route_table_association" "public_subnets_rt_association" {
   count          = length(var.availability_zones)
   subnet_id      = element(aws_subnet.public_subnets.*.id, count.index)
-  route_table_id = aws_route_table.public_subnet_1_route_table.id
+  route_table_id = aws_route_table.public_subnets_route_table.id
 }
 
 ########## NAT Gateway ##########
@@ -85,7 +85,7 @@ resource "aws_route_table" "private_subnets_route_table" {
   count  = length(var.availability_zones)
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.nat_gateway.id
+    gateway_id = aws_nat_gateway.nat_gateway.id[0]
   }
 
   tags = {
@@ -93,9 +93,9 @@ resource "aws_route_table" "private_subnets_route_table" {
   }
 }
 
-resource "aws_route_table_association" "private_subnet_1_rt_association" {
+resource "aws_route_table_association" "private_subnets_rt_association" {
   count          = length(var.availability_zones)
   subnet_id      = element(aws_subnet.private_subnets.*.id, count.index)
-  route_table_id = aws_route_table.private_subnet_1_route_table.id
+  route_table_id = aws_route_table.private_subnets_route_table.id
 }
 

@@ -18,3 +18,7 @@ variable "ec2_public_key" {
   type        = string
 }
 
+variable "bastion_sg_id" {
+  description = "ID of Bastion security group"
+}
+

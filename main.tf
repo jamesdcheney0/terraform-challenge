@@ -29,8 +29,10 @@ module "aws_security_groups" {
 }
 
 
-module "aws_ec2" {
+module "bastion" {
   source            = "./modules/ec2"
+  public_subnet = module.vpc.public_subnets[0]
+  bastion_sg_id = module.security-groups.bastion_ssh_sg_id
   ec2_instance_type = var.ec2_instance_type
   ec2_volume_size   = var.ec2_volume_size
   ec2_volume_type   = var.ec2_volume_type
@@ -54,6 +56,10 @@ module "aws_s3" {
 module "aws_autoscaling" {
   source            = "./modules/autoscaling-group+alb"
   env               = var.env
+  vpc_id = module.vpc.vpc_id
+  private_subnets       = module.vpc.private_subnets
+  public_subnets = [module.vpc.public_subnets]
+  web_server_sg_id  = [module.security-groups.web_server_sg_id]
   ec2_instance_type = var.asg_instance_type
   ec2_volume_size   = var.asg_volume_size
   ec2_volume_type   = var.asg_volume_type
