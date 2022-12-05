@@ -22,3 +22,6 @@ variable "bastion_sg_id" {
   description = "ID of Bastion security group"
 }
 
+variable "public_subnet" {
+  description = "ID of public subnet to use"
+}
