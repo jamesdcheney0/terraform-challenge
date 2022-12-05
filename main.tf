@@ -2,17 +2,17 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.16.0"
+      version = "4.45.0"
     }
   }
 }
 
-# provider "aws" {
+provider "aws" {
 #   region = var.aws_region
 #   # shared_config_files = ["/Users/jamescheney/.aws/config"]
 #   # shared_credentials_files = ["/Users/jamescheney/.aws/credentials"]
 #   # profile = "personal-aws"
-# }
+}
 
 module "aws_vpc" {
   source             = "./modules/vpc"
