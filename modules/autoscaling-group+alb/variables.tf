@@ -1,79 +1,48 @@
-variable "asg_name" {
-  description = "Name of the Autoscaling Group"
-  type = string
+variable "env" {
+  description = "Purpose of the environment"
+  type        = string
 }
-variable "ec2_instance_name" {
-  description = "Name of the EC2 instance"
-  type = string
-}
-variable "alb_name" {
-  description = "Name of the application load balancer"
-  type = string
-}
-variable "alb_tg_name" {
-  description = "Name of the target group for the application load balancer"
-  type = string
+variable "vpc_id" {
+  description = "ID of the VPC to be launched in"
+  type        = string
 }
 
+variable "private_subnets" {
+  description = "Subnets the autoscaling group will operate in"
+}
+variable "public_subnets" {
+  description = "Subnets the elastic load balancer will operate in"
+}
 
+variable "web_server_sg_id" {
+  description = "Web server security group ID"
+}
 
 variable "ec2_instance_type" {
   description = "EC2 instance type"
-  type = string
+  type        = string
 }
 variable "ec2_volume_size" {
   description = "EC2 volume size"
-  type = string
+  type        = string
 }
 variable "ec2_volume_type" {
   description = "EC2 volume type"
-  type = string
+  type        = string
 }
 variable "ec2_public_key" {
   description = "Public key for SSH access to instance"
-  type = string
+  type        = string
 }
 
-
-
-variable "vpc_id" {
-  description = "ID of the VPC to be launched in"
-  type = string
-}
-
-
-
-variable "public_subnet_1_id" {
-  description = "ID of the first public subnet to be launched in"
-  type = string
-}
-variable "public_subnet_2_id" {
-  description = "ID of the second public subnet to be launched in"
-  type = string
-}
-variable "private_subnet_1_id" {
-  description = "ID of the first private subnet to be launched in"
-  type = string
-}
-variable "private_subnet_2_id" {
-  description = "ID of the second private subnet to be launched in"
-  type = string
-}
-
-
-
-variable "web_server_sg" {
-  description = "Security group to allow web access to autoscaling group instances"
-  type = string
-}
 
 
 
 variable "asg_max_size" {
   description = "Maximum desired quantity of autoscaled instances"
-  type = string
+  type        = string
 }
 variable "asg_min_size" {
   description = "Minimum desired quantity of autoscaled instances"
-  type = string
+  type        = string
 }

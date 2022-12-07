@@ -82,3 +82,17 @@ For now, workaround is use Intel Mac
 - Need to totally delete all terraform things (not just brew uninstall) and try again tomorrow
 - New day, starting over. `brew uninstall terraform`, looked at [this article](https://discuss.hashicorp.com/t/template-v2-2-0-does-not-have-a-package-available-mac-m1/35099/7) then `brew install tfenv`, `tfenv list-remote`, `tfenv install`. Then ran `brew install kreuzwerker/taps/m1-terraform-provider-helper`, `m1-terraform-provider-helper activate` which both did nothing, since already installed, then `m1-terraform-provider-helper install hashicorp/template -v v2.2.0` and it said version could not be resolved. Set version `tfenv use 1.0.9` since the guy in the forum suggested that one specifically. Ran `m1-terraform-provider-helper install hashicorp/template -v v2.2.0` and it worked. Installed terraform `brew install terraform` and got an error saying to run `brew unlink tfenv` then `brew install terraform` then had to reinstall tfenv again. It was already installed, and said I needed to `brew link tfenv`, so I did that, then `brew unlink terraform` then `brew link tfenv` again, then `tfenv use 1.0.9`. Ran terraform init and it came back with incompatible provider version again......... for now, going to just run code from the intel mac from work and develop on my m1 mac.
 - also, vscode decided to stop working, so I'm developing on atom now.
+
+
+# Further learning
+1. Naming convention for resources was silly. Converted from naming them each with a variable to simply combining a string and tagging it based on environment, e.g. dev, test
+1. using count meta argument to condense the amount of code duplication
+    1. Public Subnets
+        1. `length(var.availability_zones)` checks how many availability zones have been defined in the variables
+        1. `count.index` references the `count` block under the resource that, in the case of the main.tf under vpc, line 20, returns a count of the result of `length(var.availability_zones)`
+        1. `element` rolls over and iterates through the available values. E.g., if only count.index[0] and count.index[1] have values, and index[2] is called, it will start at the beginning and return the value of count.index[0]
+    1. Private subnets
+        1. only a small change here - since the subnets can't have overlapping cidr addresses, the use of `count.index + length(var.availability_zones)` adds whatever the value of the quantity of subnets is (in this case 2) to the count, so that out of the 8-way division of the CIDR block, the same index isn't used for multiple subnets. 
+    1. The use of length, count, and element are demonstrated in [this](https://cloudacademy.com/course/terraform-provisioning-aws-infrastructure/aws-advanced-vpc-alb-ec2-instances-v2/?context_id=2814&context_resource=lp) cloudacademy post, and repo is [here](https://github.com/cloudacademy/terraform-aws). Most of the count related things come from exercises > exercises 3
+1. outputs can't be shared between child modules. The parent module (main.tf in the main directory) must pull those outputs, then give them to the children. Outsource module work whenever possible 
+1. Don't use [] around stuff like subnets. It confuses the data processing 

@@ -2,3 +2,6 @@
 .terraform.lock.hcl
 .gitignore
 .rootkey.csv
+.terraform/providers/registry.terraform.io/hashicorp/aws/3.16.0/darwin_amd64/terraform-provider-aws_v3.16.0_x5
+.terraform*
+further-training/*
